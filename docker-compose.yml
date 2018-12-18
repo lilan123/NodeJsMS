@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+  fast-service:
+    container_name: fast-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '49160:8080'
+    links:
+      - mongo
+    environment:
+      WAIT_HOSTS: mongodb:27017
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - /data/mongodb/db:/data/db
+    ports:
+      - "27017:27017"
+
+
+
+      

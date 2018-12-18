@@ -1,0 +1,97 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "SSNet",
+      "description": "SSNet",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:49160",
+    "basePath": "/api/v1",
+    "tags": [
+      {
+        "name": "TodoList",
+        "description": "API for TodoList in the system"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/todolist": {
+        "post": {
+          "tags": [
+            "TodoItem"
+          ],
+          "description": "Create new TodoItem in system",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "TodoItem that we want to create",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "TodoItem is created",
+              "schema": {
+                "$ref": "#/definitions/TodoItem"
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "TodoItem"
+          ],
+          "summary": "Get all TodoItems in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/TodoItems"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "TodoItem": {
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string"
+          }
+        }
+      },
+      "TodoItems": {
+        "type": "array",
+        "$ref": "#/definitions/TodoItem"
+      }
+    }
+  }
